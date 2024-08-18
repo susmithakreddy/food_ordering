@@ -128,18 +128,18 @@ DATABASES = {
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '450459444535-m97umu6vrph7eqk6f25omi93rfullvfg.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': 'add your client id',
+            'secret': 'add your secret',
             'key': ''
         }
     }
 }
 
-STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PnRX204Eo36I3qh4txDRlRuUPr1mAKVKxhdRtYlc84L4LGsDyztPtZDp2Hi2Ud7hEXluPWAWgZBXoIIZUSTgLkY00uM3oB5L1'
-STRIPE_TEST_SECRET_KEY = 'sk_test_51PnRX204Eo36I3qh2YaGsic5QILmV09uU9SDINzZJKZd3JTIlDiFX9njUpPWRDy0VvPdP5iaerWR8jfKXoTgJXyo00qZ2jwLIc'
+STRIPE_TEST_PUBLIC_KEY = 'ADD YOUR DATA'
+STRIPE_TEST_SECRET_KEY = 'ADD YOUR DATA'
 
 
-STRIPE_ENDPOINT_SECRET = 'whsec_AV7FU5BGqYbhLOw9nGWysApKEmaOrdeh'
+STRIPE_ENDPOINT_SECRET = 'ADD YOUR DATA'
 
 
 # Password validation
