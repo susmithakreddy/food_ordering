@@ -11,11 +11,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,20 +30,54 @@ SECRET_KEY = 'django-insecure-pk9z5_^dpb48lac138^20qu*6e=r_nok0r75m94_+4pxd=9fd!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+   'localhost',
+    '127.0.0.1',
+    '3975-2406-7400-45-b1a4-91a7-512c-1ba9-a77b.ngrok-free.app',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://3975-2406-7400-45-b1a4-91a7-512c-1ba9-a77b.ngrok-free.app',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #my_app
     'orders',
+
+    # Third-party apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# Redirect URLs after login/logout
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# Email verification
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # or 'mandatory'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +87,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'food_ordering.urls'
@@ -57,7 +95,7 @@ ROOT_URLCONF = 'food_ordering.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,6 +125,21 @@ DATABASES = {
     }
 }
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '450459444535-m97umu6vrph7eqk6f25omi93rfullvfg.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
+
+STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PnRX204Eo36I3qh4txDRlRuUPr1mAKVKxhdRtYlc84L4LGsDyztPtZDp2Hi2Ud7hEXluPWAWgZBXoIIZUSTgLkY00uM3oB5L1'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51PnRX204Eo36I3qh2YaGsic5QILmV09uU9SDINzZJKZd3JTIlDiFX9njUpPWRDy0VvPdP5iaerWR8jfKXoTgJXyo00qZ2jwLIc'
+
+
+STRIPE_ENDPOINT_SECRET = 'whsec_AV7FU5BGqYbhLOw9nGWysApKEmaOrdeh'
 
 
 # Password validation

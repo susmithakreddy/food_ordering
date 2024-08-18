@@ -1,8 +1,36 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.restaurant-tiles {
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+/* Restaurant list styles */
+.restaurant-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -10,18 +38,34 @@ body {
 
 .restaurant-tile {
     border: 1px solid #ddd;
-    padding: 20px;
-    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: calc(33.333% - 20px); /* Adjust width to fit three tiles per row */
     text-align: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    background-color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .restaurant-tile:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.restaurant-tile h3 {
+    margin: 0;
+    color: #555;
+}
+
+.restaurant-tile p {
+    color: #777;
 }
 
 .restaurant-tile a {
+    color: #007bff;
     text-decoration: none;
-    color: #000;
+}
+
+.restaurant-tile a:hover {
+    text-decoration: underline;
 }

@@ -15,14 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from orders import views
+from allauth.account import views as allauth_views
+from orders.forms import CustomUserCreationForm
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
-    path('', views.restaurant_list, name='restaurant_list'),
-    path('restaurant/<int:restaurant_id>/', views.menu, name='menu'),
-    path('restaurant/<int:restaurant_id>/order/', views.create_order, name='create_order'),
-    path('order/<int:order_id>/confirmation/', views.order_confirmation, name='order_confirmation'),
-    path('restaurant/<int:restaurant_id>/', views.restaurant_detail, name='restaurant_detail'),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/signup/', allauth_views.SignupView.as_view(form_class=CustomUserCreationForm), name='account_signup'),
+    path('', include('orders.urls')),  
 ]

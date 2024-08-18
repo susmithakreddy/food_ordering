@@ -1,24 +1,16 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurants</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
-    <h1>Restaurants</h1>
-    <div class="restaurant-tiles">
-        {% for restaurant in restaurants %}
-            <div class="restaurant-tile">
-                <a href="{% url 'restaurant_detail' restaurant.id %}">
-                    <h2>{{ restaurant.name }}</h2>
-                    <p>{{ restaurant.address }}</p>
-                    <p>Contact: {{ restaurant.contact_number }}</p>
-                </a>
-            </div>
-        {% endfor %}
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>Restaurants</h2>
+<div class="restaurant-list">
+    {% for restaurant in restaurants %}
+    <div class="restaurant-tile">
+        <h3>{{ restaurant.name }}</h3>
+        <p>{{ restaurant.address }}</p>
+        <a href="{% url 'restaurant_detail' restaurant.id %}">View Details</a>
     </div>
-</body>
-</html>
+    {% empty %}
+    <p>No restaurants available.</p>
+    {% endfor %}
+</div>
+{% endblock %}
