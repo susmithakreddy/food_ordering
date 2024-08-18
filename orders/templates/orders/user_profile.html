@@ -1,0 +1,35 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>Profile</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ profile_form.as_p }}
+    <button type="submit">Update Profile</button>
+</form>
+
+<h3>Addresses</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ address_form.as_p }}
+    <button type="submit">Add Address</button>
+</form>
+
+<ul>
+    {% for address in addresses %}
+    <li>{{ address.street }}, {{ address.city }}, {{ address.state }} {{ address.zip_code }}</li>
+    {% empty %}
+    <li>No addresses added.</li>
+    {% endfor %}
+</ul>
+
+<h3>Past Orders</h3>
+<ul>
+    {% for order in orders %}
+    <li>Order #{{ order.id }} - Total: {{ order.total_amount }} - Created at: {{ order.created_at }}</li>
+    {% empty %}
+    <li>No orders found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

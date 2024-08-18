@@ -1,0 +1,28 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>{{ restaurant.name }}</h2>
+<p>{{ restaurant.address }}</p>
+<p>Contact: {{ restaurant.contact_number }}</p>
+<p>Opening Time: {{ restaurant.opening_time }}</p>
+<p>Closing Time: {{ restaurant.closing_time }}</p>
+
+<h3>Menu Items</h3>
+<form method="post">
+    {% csrf_token %}
+    {% if menu_items %}
+        <ul>
+            {% for item in menu_items %}
+                <li>
+                    <strong>{{ item.name }}</strong>: {{ item.description }} - ${{ item.price }}
+                    <input type="hidden" name="menu_items" value="{{ item.id }}">
+                    <input type="number" name="quantity" min="0" value="1">
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Add to Order</button>
+    {% else %}
+        <p>No menu items available.</p>
+    {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+{% load socialaccount %}
+
+
+{% block content %}
+<h2>Login</h2>
+  <form method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+
+  <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+
+  <!-- Social login -->
+  <div>
+    <h3>Or login with:</h3>
+    {% providers_media_js %}
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+  </div>
+  {% endblock %}

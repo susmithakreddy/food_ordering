@@ -1,0 +1,7 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>Checkout</h2>
+<p>Thank you for your order! We are processing your payment and will update you shortly.</p>
+<a href="{% url 'order_summary' order_id=order.id %}">Back to Order Summary</a>
+{% endblock %}
