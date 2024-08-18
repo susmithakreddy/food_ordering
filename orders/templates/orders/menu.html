@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu for {{ restaurant.name }}</h1>
+    <form method="POST" action="{% url 'create_order' restaurant.id %}">
+        {% csrf_token %}
+        <input type="text" name="customer_name" placeholder="Your Name" required><br>
+        <input type="text" name="customer_address" placeholder="Your Address" required><br>
+        <input type="text" name="customer_phone" placeholder="Your Phone" required><br>
+
+        {% for category in categories %}
+            <h2>{{ category.name }}</h2>
+            <ul>
+                {% for item in category.items.all %}
+                    <li>
+                        {{ item.name }} - ${{ item.price }}
+                        <input type="number" name="quantities[]" value="1" min="1">
+                        <input type="hidden" name="items[]" value="{{ item.id }}">
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>
